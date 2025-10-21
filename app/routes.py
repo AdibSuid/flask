@@ -18,10 +18,25 @@ portfolio = [
 ]
 
 team = [
-    {"name": "Alice Wong", "role": "CEO", "image": "images/team1.jpg"},
-    {"name": "Bob Tan", "role": "CTO", "image": "images/team2.jpg"},
-    {"name": "Charlie Lee", "role": "Lead Engineer", "image": "images/team3.jpg"}
-]
+        {"name": "Meow", "role": "CEO & Founder", "image": "images/team1.jpg",
+         "bio": "Visionary leader driving innovation and growth."},
+        {"name": "Ashraf Zulhelmi", "role": "Chief Technology Officer", "image": "images/team2.jpg",
+         "bio": "Expert in AI and scalable cloud solutions."},
+        {"name": "Afiq Zawawi", "role": "Chief Finance Officer", "image": "images/team3.jpg",
+         "bio": "Overseeing accounting, managing cash flow, and analyzing financial data."},
+        {"name": "Fadhlul Wafi", "role": "Lead Software Engineer", "image": "images/team4.jpg",
+         "bio": "Crafts impactful brand narratives and campaigns."},
+        {"name": "Eiman Azzam", "role": "Software Engineer", "image": "images/team5.jpg",
+         "bio": "Architect of robust backend and microservices."},
+        {"name": "Hanis Izani", "role": "Project Engineer", "image": "images/team6.jpg",
+         "bio": "Transforms data into actionable business insights."},
+        {"name": "Naufal Bakri", "role": "AI Research Engineer", "image": "images/team7.jpg",
+         "bio": "Develops machine learning and NLP solutions."},
+        {"name": "Zulhilmi", "role": "Robotics Engineer", "image": "images/team8.jpg",
+         "bio": "Designs intuitive and delightful digital interfaces."},
+        {"name": "Hamzah Faisal", "role": "DevOps Engineer", "image": "images/team9.jpg",
+         "bio": "Ensures smooth deployment and reliable infrastructure."},
+    ]
 
 @main.route('/')
 def index():

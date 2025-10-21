@@ -10,9 +10,9 @@ services:
     networks:
       - web
     volumes:
-      - .:/app   # Mount current folder (flask/) to /app
-    working_dir: /app
-    command: python3 app.py
+      - .:/run   # Mount current folder (flask/) to /app
+    working_dir: /run
+    command: python3 run.py
 
 networks:
   web:

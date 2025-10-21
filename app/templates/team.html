@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Our Team</h2>
+<div class="row">
+  {% for member in team %}
+  <div class="col-md-4 mb-4 text-center">
+    <img src="{{ url_for('static', filename=member.image) }}" class="img-fluid rounded-circle mb-2">
+    <h5>{{ member.name }}</h5>
+    <p>{{ member.role }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

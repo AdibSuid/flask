@@ -1,23 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="hero text-center py-5" style="background: url('{{ url_for('static', filename='images/hero-bg.jpg') }}') center/cover no-repeat; color: white;">
-  <h1 class="display-4">Innovating AI & Software Solutions</h1>
-  <p class="lead">Building intelligent systems for a smarter future.</p>
-</div>
-
-<h2 class="my-5">Our Services</h2>
-<div class="row">
-  {% for service in services %}
-  <div class="col-md-3">
-    <div class="card mb-3 p-3 h-100">
-      <h5>{{ service.title }}</h5>
-      <p>{{ service.desc }}</p>
-    </div>
-  </div>
-  {% endfor %}
-</div>
-
-<h2 class="my-5">Portfolio</h2>
+<h2>Portfolio</h2>
 <div class="row" id="portfolio-container">
   {% for project in portfolio %}
   <div class="col-md-3 mb-3 portfolio-item" data-category="{{ project.category }}">

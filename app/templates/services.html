@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Our Services</h2>
+<div class="row">
+  {% for service in services %}
+  <div class="col-md-6 mb-4">
+    <div class="card p-3 h-100">
+      <h4>{{ service.title }}</h4>
+      <p>{{ service.desc }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

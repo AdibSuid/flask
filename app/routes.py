@@ -1,60 +1,34 @@
-from flask import render_template, request, redirect, url_for, session
-from app import app
+from flask import Blueprint, render_template, redirect, url_for, request
+from .models import Product
+from . import db
 
-# Mock products for demo
-PRODUCTS = [
-    {"id": 1, "name": "Smartphone X", "price": 999, "image": "/static/images/product1.jpg"},
-    {"id": 2, "name": "Wireless Headphones", "price": 199, "image": "/static/images/product2.jpg"},
-    {"id": 3, "name": "Smartwatch Pro", "price": 299, "image": "/static/images/product3.jpg"}
-]
+main = Blueprint('main', __name__)
 
-# Homepage
-@app.route("/")
+@main.route('/')
 def home():
-    return render_template("index.html", products=PRODUCTS)
+    products = Product.query.limit(3).all()  # featured products
+    return render_template('index.html', products=products)
 
-# About page
-@app.route("/about")
-def about():
-    return render_template("about.html")
-
-# Contact page
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
-
-# Shop page
-@app.route("/shop")
+@main.route('/shop')
 def shop():
-    return render_template("shop.html", products=PRODUCTS)
+    products = Product.query.all()
+    return render_template('shop.html', products=products)
 
-# Product detail
-@app.route("/product/<int:product_id>")
+@main.route('/product/<int:product_id>')
 def product(product_id):
-    product = next((p for p in PRODUCTS if p["id"] == product_id), None)
-    if not product:
-        return "Product not found", 404
-    return render_template("product.html", product=product)
+    product = Product.query.get_or_404(product_id)
+    return render_template('product.html', product=product)
 
-# Cart functionality
-@app.route("/cart")
-def cart():
-    if "cart" not in session:
-        session["cart"] = []
-    cart_items = [p for p in PRODUCTS if p["id"] in session["cart"]]
-    total = sum(item["price"] for item in cart_items)
-    return render_template("cart.html", cart_items=cart_items, total=total)
+@main.route('/checkout/<int:product_id>', methods=['GET', 'POST'])
+def checkout(product_id):
+    product = Product.query.get_or_404(product_id)
+    if request.method == 'POST':
+        bank = request.form.get('bank')
+        # Here you would call PayNet FPX API
+        # For demo, redirect to success page
+        return redirect(url_for('main.success'))
+    return render_template('checkout.html', product=product)
 
-@app.route("/add-to-cart/<int:product_id>")
-def add_to_cart(product_id):
-    if "cart" not in session:
-        session["cart"] = []
-    session["cart"].append(product_id)
-    session.modified = True
-    return redirect(url_for("cart"))
-
-@app.route("/checkout")
-def checkout():
-    # Example integration: Stripe API (mock)
-    # Normally you would call Stripe checkout API here
-    return "Redirecting to payment gateway..."
+@main.route('/success')
+def success():
+    return render_template('success.html')

@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  flask-app:
+    build: .
+    container_name: flask-app
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    networks:
+      - web
+    volumes:
+      - .:/app   # Mount current folder (flask/) to /app
+    working_dir: /app
+    command: python3 app.py
+
+networks:
+  web:
+    external: true
